@@ -3,8 +3,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future<http.Response> fetchData() {
-  return http.get('https://rki-vaccination-data.vercel.app/api');
+Future<List<StateEntry>> fetchData() async {
+  final response =
+      await http.get('https://rki-vaccination-data.vercel.app/api');
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return parseResponse(response.body);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load vaccination data');
+  }
 }
 
 class VaccineStatus {
@@ -47,7 +58,7 @@ List<StateEntry> parseResponse(String jsonStr) {
 }
 
 void main() {
-  fetchData().then((value) => print(value.body));
+  fetchData().then((value) => print(value));
 
   runApp(MyApp());
 }
