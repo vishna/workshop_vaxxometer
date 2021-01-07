@@ -428,3 +428,17 @@ extension StateEntrySortingExtensions on List<StateEntry> {
   }
 }
 ```
+
+### Let's toggle sorting mode using floating action button
+
+We need different icons
+
+[Material Icon Set](https://material.io/resources/icons/?style=baseline)
+
+We'll use:
+
+- `sort_by_alpha` for for name sorting
+- `accessibility/family_restroom` for vaccinated count sorting
+- `trending_up` for quota sorting
+
+Check with hot reload if the icons are there!
