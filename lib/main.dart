@@ -158,8 +158,10 @@ class StateEntryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text("Hello from ${entry.name}!")));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SecondRoute()),
+        );
       },
       child: Row(
         children: [
@@ -246,5 +248,24 @@ extension SortingTypeExt on SortingType {
       case SortingType.byName:
         return "Sort by Name";
     }
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Navigate back to first route when tapped.
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
   }
 }

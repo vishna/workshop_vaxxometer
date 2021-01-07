@@ -531,3 +531,38 @@ class StateEntryWidget extends StatelessWidget {
       child: Row(
       /// ...
 ```
+
+### Navigate To Detail View
+
+Create a screen and navigate to it instead of displaying snack bar:
+https://flutter.dev/docs/cookbook/navigation/navigation-basics
+
+```dart
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Navigate back to first route when tapped.
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+```
+
+```dart
+onPressed: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => SecondRoute()),
+  );
+}
+```
