@@ -156,32 +156,38 @@ class StateEntryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  entry.name,
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                Text(
-                    "${entry.status.vaccinated} out of ${entry.status.total} vaccinted"),
-              ],
+    return InkWell(
+      onTap: () {
+        Scaffold.of(context)
+            .showSnackBar(SnackBar(content: Text("Hello from ${entry.name}!")));
+      },
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    entry.name,
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  Text(
+                      "${entry.status.vaccinated} out of ${entry.status.total} vaccinted"),
+                ],
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "${entry.status.quote}%",
-            style: Theme.of(context).textTheme.headline4,
-          ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "${entry.status.quote}%",
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

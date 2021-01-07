@@ -508,3 +508,26 @@ floatingActionButton: FloatingActionButton(
         child: Icon(sortingType.iconData),
       )
 ```
+
+### Make items on the list clickable
+
+Wrap item with InkWell and display message saying e.g. `Hello from Berlin!` using SnackBar:
+
+[![](https://img.youtube.com/vi/zpO6n_oZWw0/0.jpg)](https://www.youtube.com/watch?v=zpO6n_oZWw0)
+
+```dart
+class StateEntryWidget extends StatelessWidget {
+  final StateEntry entry;
+
+  const StateEntryWidget({Key key, this.entry}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Scaffold.of(context)
+            .showSnackBar(SnackBar(content: Text("Hello from ${entry.name}!")));
+      },
+      child: Row(
+      /// ...
+```
