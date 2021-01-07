@@ -329,3 +329,51 @@ class StateEntryWidget extends StatelessWidget {
   }
 }
 ```
+
+### Making it look pretty
+
+- [Deep Dive in Rows & Columns](https://medium.com/jlouage/flutter-row-column-cheat-sheet-78c38d242041)
+- [Applying Theme to Text](https://flutter.dev/docs/cookbook/design/themes)
+
+[![](https://img.youtube.com/vi/_rnZaagadyo/0.jpg)](https://www.youtube.com/watch?v=_rnZaagadyo)
+[![](https://img.youtube.com/vi/CI7x0mAZiY0/0.jpg)](https://www.youtube.com/watch?v=CI7x0mAZiY0)
+[![](https://img.youtube.com/vi/oD5RtLhhubg/0.jpg)](https://www.youtube.com/watch?v=oD5RtLhhubg)
+
+```dart
+class StateEntryWidget extends StatelessWidget {
+  final StateEntry entry;
+
+  const StateEntryWidget({Key key, this.entry}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  entry.name,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Text(
+                    "${entry.status.vaccinated} out of ${entry.status.total} vaccinted"),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "${entry.status.quote}%",
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        )
+      ],
+    );
+  }
+}
+```

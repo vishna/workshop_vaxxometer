@@ -157,14 +157,29 @@ class StateEntryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Column(
-          children: [
-            Text(entry.name),
-            Text(
-                "${entry.status.vaccinated} out of ${entry.status.total} vaccinted"),
-          ],
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  entry.name,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Text(
+                    "${entry.status.vaccinated} out of ${entry.status.total} vaccinted"),
+              ],
+            ),
+          ),
         ),
-        Text("${entry.status.quote}")
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "${entry.status.quote}%",
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        )
       ],
     );
   }
