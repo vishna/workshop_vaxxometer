@@ -26,6 +26,16 @@ class VaccineStatus {
   }
 }
 
+class StateEntry {
+  StateEntry({this.status, this.name});
+  final VaccineStatus status;
+  final String name;
+}
+
+List<StateEntry> parseResponse(String jsonStr) {
+  throw UnimplementedError();
+}
+
 void main() {
   fetchData().then((value) => print(value.body));
 

@@ -131,3 +131,21 @@ test('json parsing Berlin', () {
     expect(berlinStatus.quote, 0.66);
   });
 ```
+
+### Parse the rest of the json
+
+The `VaccineStatus` doesn't contain name of the state, instead the name of the state is used as a key in the json map. This is rather inconvienent but nothing that we cannot handle.
+
+Let's create a class for that:
+
+```dart
+class StateEntry {
+  StateEntry({this.status, this.name});
+  final VaccineStatus status;
+  final String name;
+}
+
+List<StateEntry> parseResponse(String jsonStr) {
+  throw UnimplementedError();
+}
+```
