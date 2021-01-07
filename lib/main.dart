@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,7 +35,15 @@ class StateEntry {
 }
 
 List<StateEntry> parseResponse(String jsonStr) {
-  throw UnimplementedError();
+  final json = jsonDecode(jsonStr);
+  final statesMap = json["states"] as Map<String, dynamic>;
+  return statesMap.keys.map((key) {
+    final vaccineStatusJson = statesMap[key];
+    return StateEntry(
+      status: VaccineStatus.fromJson(vaccineStatusJson),
+      name: key,
+    );
+  }).toList();
 }
 
 void main() {

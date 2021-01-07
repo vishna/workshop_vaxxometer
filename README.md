@@ -158,3 +158,19 @@ List<StateEntry> parseResponse(String jsonStr) {
     expect(states.isNotEmpty, true);
   });
 ```
+
+### Provide parseResponse implementation
+
+```dart
+List<StateEntry> parseResponse(String jsonStr) {
+  final json = jsonDecode(jsonStr);
+  final statesMap = json["states"] as Map<String, dynamic>;
+  return statesMap.keys.map((key) {
+    final vaccineStatusJson = statesMap[key];
+    return StateEntry(
+      status: VaccineStatus.fromJson(vaccineStatusJson),
+      name: key,
+    );
+  }).toList();
+}
+```
