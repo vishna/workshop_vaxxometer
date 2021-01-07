@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+Future<http.Response> fetchData() {
+  return http.get('https://rki-vaccination-data.vercel.app/api');
+}
 
 void main() {
+  fetchData().then((value) => print(value.body));
+
   runApp(MyApp());
 }
 

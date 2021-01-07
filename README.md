@@ -47,3 +47,27 @@ Visit pub.dev, copy paste latest version into your pubspec file.
 Don't forget about necessary permissions for the platform you're developing for:
 
 https://stackoverflow.com/questions/61196860/how-to-enable-flutter-internet-permission-for-macos-desktop-app
+
+You might need to cold restart the app after chaning platform stuff.
+
+#### Let's fetch string data from our enpoint
+
+Copy code snippet from this web page (including import)
+
+https://flutter.dev/docs/cookbook/networking/fetch-data
+
+modify it to use our endpoint:
+
+```dart
+Future<http.Response> fetchData() {
+  return http.get('https://rki-vaccination-data.vercel.app/api');
+}
+
+void main() {
+  fetchData().then((value) => print(value.body));
+
+  runApp(MyApp());
+}
+```
+
+__HOT RESTART__ the app and check debug console if the request response is logged:
