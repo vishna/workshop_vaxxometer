@@ -442,3 +442,69 @@ We'll use:
 - `trending_up` for quota sorting
 
 Check with hot reload if the icons are there!
+
+### Define enum class for possible sorting types
+
+```dart
+enum SortingType { byQuota, byVaccinated, byName }
+```
+
+Replace `counter` value with sortingType, add extension method accepting enum:
+
+```dart
+  List<StateEntry> sortedBy(SortingType sortingType) {
+    switch (sortingType) {
+      case SortingType.byQuota:
+        return sortedByQuotaDesc();
+      case SortingType.byVaccinated:
+        return sortedByVaccinatedDesc();
+      case SortingType.byName:
+        return sortedByNameAsc();
+    }
+  }
+```
+
+Add extension method on enum to display proper tooltip and icon for the floating action button
+
+```dart
+extension SortingTypeExt on SortingType {
+  IconData get iconData {
+    switch (this) {
+      case SortingType.byQuota:
+        return Icons.trending_up;
+      case SortingType.byVaccinated:
+        return Icons.family_restroom;
+      case SortingType.byName:
+        return Icons.sort_by_alpha;
+    }
+  }
+
+  String get tooltip {
+    switch (this) {
+      case SortingType.byQuota:
+        return "Sort by Percentage";
+      case SortingType.byVaccinated:
+        return "Sort by Vaccinated Count";
+      case SortingType.byName:
+        return "Sort by Name";
+    }
+  }
+}
+```
+
+Finally make the floating action button callback update widget's state:
+
+```dart
+void _switchSortingType() {
+    setState(() {
+      final nextIndex = SortingType.values.indexOf(sortingType) + 1;
+      sortingType = SortingType.values[nextIndex % SortingType.values.length];
+    });
+  }
+
+floatingActionButton: FloatingActionButton(
+        onPressed: _switchSortingType,
+        tooltip: sortingType.tooltip,
+        child: Icon(sortingType.iconData),
+      )
+```

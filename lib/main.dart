@@ -85,11 +85,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  var sortingType = SortingType.byName;
 
-  void _incrementCounter() {
+  void _switchSortingType() {
     setState(() {
-      _counter++;
+      final nextIndex = SortingType.values.indexOf(sortingType) + 1;
+      sortingType = SortingType.values[nextIndex % SortingType.values.length];
     });
   }
 
@@ -132,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
             }
 
             // we have data
-            final items = snapshot.data.sortedByQuotaDesc();
+            final items = snapshot.data.sortedBy(sortingType);
             return ListView.builder(
               itemBuilder: (context, index) =>
                   StateEntryWidget(entry: items[index]),
@@ -140,9 +141,9 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.trending_up),
+        onPressed: _switchSortingType,
+        tooltip: sortingType.tooltip,
+        child: Icon(sortingType.iconData),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -202,5 +203,42 @@ extension StateEntrySortingExtensions on List<StateEntry> {
     final output = List<StateEntry>.from(this);
     output.sort((a, b) => a.name.compareTo(b.name));
     return output;
+  }
+
+  List<StateEntry> sortedBy(SortingType sortingType) {
+    switch (sortingType) {
+      case SortingType.byQuota:
+        return sortedByQuotaDesc();
+      case SortingType.byVaccinated:
+        return sortedByVaccinatedDesc();
+      case SortingType.byName:
+        return sortedByNameAsc();
+    }
+  }
+}
+
+enum SortingType { byQuota, byVaccinated, byName }
+
+extension SortingTypeExt on SortingType {
+  IconData get iconData {
+    switch (this) {
+      case SortingType.byQuota:
+        return Icons.trending_up;
+      case SortingType.byVaccinated:
+        return Icons.family_restroom;
+      case SortingType.byName:
+        return Icons.sort_by_alpha;
+    }
+  }
+
+  String get tooltip {
+    switch (this) {
+      case SortingType.byQuota:
+        return "Sort by Percentage";
+      case SortingType.byVaccinated:
+        return "Sort by Vaccinated Count";
+      case SortingType.byName:
+        return "Sort by Name";
+    }
   }
 }
