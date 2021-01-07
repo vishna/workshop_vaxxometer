@@ -24,7 +24,7 @@ cd vaxxometer
 
 ### Modify contents of the counter to create simple Vaxxometer
 
-AC:
+Acceptance Criteria:
 
 - Vaccination Data is fetched from RKI servers: https://rki-vaccination-data.vercel.app/api
 - If data is loaded display it as a list
@@ -32,6 +32,10 @@ AC:
 - If data failed to load, display error message
 - Add button allowing toggling between alphabetical order and order based on vaccination progress
 - Tapping on an item should display a tapped item in detail view (see screenshot)
+
+Design by Łukasz Designs™:
+
+<img width="240" alt="Screenshot 2021-01-07 at 23 14 07" src="https://user-images.githubusercontent.com/121164/103950969-21b0f700-513e-11eb-9604-eb689984aa09.png"><img width="240" alt="Screenshot 2021-01-07 at 23 14 11" src="https://user-images.githubusercontent.com/121164/103950979-27a6d800-513e-11eb-8e20-114f81bb7170.png">
 
 
 #### Change Title of The App Bar
@@ -564,5 +568,42 @@ onPressed: () {
     context,
     MaterialPageRoute(builder: (context) => SecondRoute()),
   );
+}
+```
+
+### Send data to a new screen
+
+Pass argument to your new route
+
+```dart
+onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SecondRoute(
+              entry: entry,
+            ),
+          ),
+        );
+      },
+```
+
+Display place name in the app bar:
+
+```dart
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({Key key, this.entry}) : super(key: key);
+  final StateEntry entry;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(entry.name),
+      ),
+      /// put any kind of widget you wish here
+      body: Placeholder(),
+    );
+  }
 }
 ```

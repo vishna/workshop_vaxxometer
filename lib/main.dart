@@ -160,7 +160,11 @@ class StateEntryWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SecondRoute()),
+          MaterialPageRoute(
+            builder: (context) => SecondRoute(
+              entry: entry,
+            ),
+          ),
         );
       },
       child: Row(
@@ -252,20 +256,16 @@ extension SortingTypeExt on SortingType {
 }
 
 class SecondRoute extends StatelessWidget {
+  const SecondRoute({Key key, this.entry}) : super(key: key);
+  final StateEntry entry;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Route"),
+        title: Text(entry.name),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text('Go back!'),
-        ),
-      ),
+      body: Placeholder(),
     );
   }
 }
