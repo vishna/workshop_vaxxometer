@@ -607,3 +607,7 @@ class SecondRoute extends StatelessWidget {
   }
 }
 ```
+
+### Publish your work to codemagic.io as a static page
+
+https://docs.codemagic.io/publishing/publishing-to-codemagic-static-pages/
