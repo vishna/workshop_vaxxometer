@@ -273,3 +273,18 @@ We want to display a loading state for our list, the list or error. We'll use Fu
             );
           })
 ```
+
+### Add ListView widget
+
+We have a list of elements, it would be cool if we displayed them as a scrollable list.
+
+[![](https://img.youtube.com/vi/KJpkjHGiI5A/0.jpg)](https://www.youtube.com/watch?v=KJpkjHGiI5A)
+
+```dart
+            // we have data
+            final items = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, index) => Text(items[index].name),
+              itemCount: items.length,
+            );
+```

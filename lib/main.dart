@@ -132,15 +132,10 @@ class _MyHomePageState extends State<MyHomePage> {
             }
 
             // we have data
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'We have data ${snapshot.data}',
-                  )
-                ],
-              ),
+            final items = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, index) => Text(items[index].name),
+              itemCount: items.length,
             );
           }),
       floatingActionButton: FloatingActionButton(
