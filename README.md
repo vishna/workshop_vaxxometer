@@ -32,3 +32,11 @@ AC:
 - If data failed to load, display error message
 - Add button allowing toggling between alphabetical order and order based on vaccination progress
 - Tapping on an item should display a tapped item in detail view (see screenshot)
+
+
+#### Change Title of The App Bar
+#### Fetch Data from internet
+
+https://flutter.dev/docs/cookbook/networking/fetch-data
+
+Visit pub.dev, copy paste latest version into your pubspec file.
