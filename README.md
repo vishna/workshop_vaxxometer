@@ -35,8 +35,15 @@ AC:
 
 
 #### Change Title of The App Bar
+
+Hot reload and behold.
+
 #### Fetch Data from internet
 
 https://flutter.dev/docs/cookbook/networking/fetch-data
 
 Visit pub.dev, copy paste latest version into your pubspec file.
+
+Don't forget about necessary permissions for the platform you're developing for:
+
+https://stackoverflow.com/questions/61196860/how-to-enable-flutter-internet-permission-for-macos-desktop-app
