@@ -85,4 +85,19 @@ we need a class, e.g. VaccineStatus that has following fields
 - rs, unsure, let's ignore this one
 - vaccinated, integer, number of people
 - difference_to_the_previous_day, integer, number of people
-- quote, float, vaccinations per 100 people
+- quote, float, looks like vaccinations per __100__ people
+
+
+```dart
+class VaccineStatus {
+  const VaccineStatus(
+      {this.total,
+      this.vaccinated,
+      this.difference_to_the_previous_day,
+      this.quote});
+  final int total;
+  final int vaccinated;
+  final int difference_to_the_previous_day;
+  final double quote;
+}
+```

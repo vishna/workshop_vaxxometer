@@ -5,6 +5,18 @@ Future<http.Response> fetchData() {
   return http.get('https://rki-vaccination-data.vercel.app/api');
 }
 
+class VaccineStatus {
+  const VaccineStatus(
+      {this.total,
+      this.vaccinated,
+      this.difference_to_the_previous_day,
+      this.quote});
+  final int total;
+  final int vaccinated;
+  final int difference_to_the_previous_day;
+  final double quote;
+}
+
 void main() {
   fetchData().then((value) => print(value.body));
 
