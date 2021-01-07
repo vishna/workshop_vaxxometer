@@ -193,3 +193,34 @@ Future<List<StateEntry>> fetchData() async {
   }
 }
 ```
+
+### Wrap our existing body with a FutureBuilder widget
+
+We want to display a loading state for our list, the list or error. We'll use FutureBuilder widget for this (explainer in video below):
+
+[![](https://img.youtube.com/vi/ek8ZPdWj4Qo/0.jpg)](https://www.youtube.com/watch?v=ek8ZPdWj4Qo)
+
+
+```dart
+      body: FutureBuilder<List<StateEntry>>(
+        future: fetchData(),
+        builder: (context, snapshot) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'You have pushed the button this many times:',
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
+          );
+        }
+      ),
+```
+
+...and remove other fetch from `main`
