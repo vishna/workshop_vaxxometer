@@ -404,3 +404,27 @@ List<StateEntry> sortByNameAsc(List<StateEntry> input) {
   return output;
 }
 ```
+
+### Make sorting use extension
+
+```dart
+extension StateEntrySortingExtensions on List<StateEntry> {
+  List<StateEntry> sortedByQuotaDesc() {
+    final output = List<StateEntry>.from(this);
+    output.sort((a, b) => b.status.quote.compareTo(a.status.quote));
+    return output;
+  }
+
+  List<StateEntry> sortedByVaccinatedDesc() {
+    final output = List<StateEntry>.from(this);
+    output.sort((a, b) => b.status.vaccinated.compareTo(a.status.vaccinated));
+    return output;
+  }
+
+  List<StateEntry> sortedByNameAsc() {
+    final output = List<StateEntry>.from(this);
+    output.sort((a, b) => a.name.compareTo(b.name));
+    return output;
+  }
+}
+```
