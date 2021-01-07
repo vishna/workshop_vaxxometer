@@ -303,3 +303,29 @@ class StateEntryWidget extends StatelessWidget {
   }
 }
 ```
+
+### Add some more information to the list cell
+
+```dart
+class StateEntryWidget extends StatelessWidget {
+  final StateEntry entry;
+
+  const StateEntryWidget({Key key, this.entry}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Column(
+          children: [
+            Text(entry.name),
+            Text(
+                "${entry.status.vaccinated} out of ${entry.status.total} vaccinted"),
+          ],
+        ),
+        Text("${entry.status.quote}")
+      ],
+    );
+  }
+}
+```

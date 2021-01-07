@@ -155,6 +155,17 @@ class StateEntryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(entry.name);
+    return Row(
+      children: [
+        Column(
+          children: [
+            Text(entry.name),
+            Text(
+                "${entry.status.vaccinated} out of ${entry.status.total} vaccinted"),
+          ],
+        ),
+        Text("${entry.status.quote}")
+      ],
+    );
   }
 }
