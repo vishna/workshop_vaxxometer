@@ -87,6 +87,7 @@ we need a class, e.g. VaccineStatus that has following fields
 - difference_to_the_previous_day, integer, number of people
 - quote, float, looks like vaccinations per __100__ people
 
+This is what this class looks like in dart:
 
 ```dart
 class VaccineStatus {
@@ -100,4 +101,33 @@ class VaccineStatus {
   final int difference_to_the_previous_day;
   final double quote;
 }
+```
+
+We need to add factory method to parse following json:
+
+```json
+{"total": 3644826, "rs": "11", "vaccinated": 24159, "difference_to_the_previous_day": 2204, "vaccinations_per_1000_inhabitants": 6.583746901136969, "quote": 0.66}
+```
+
+Let's quickly add that factory and then a test method:
+
+```dart
+  factory VaccineStatus.fromJson(Map<String, dynamic> json) {
+    return VaccineStatus(
+      total: json['total'],
+      vaccinated: json['vaccinated'],
+      difference_to_the_previous_day: json['difference_to_the_previous_day'],
+      quote: json['quote'],
+    );
+  }
+```
+
+```dart
+test('json parsing Berlin', () {
+    final mock_data_berlin_decoded = jsonDecode(mock_data_berlin);
+    final berlinStatus = VaccineStatus.fromJson(mock_data_berlin_decoded);
+    expect(berlinStatus.total, 3644826);
+    expect(berlinStatus.vaccinated, 24159);
+    expect(berlinStatus.quote, 0.66);
+  });
 ```
