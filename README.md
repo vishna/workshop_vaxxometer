@@ -71,3 +71,18 @@ void main() {
 ```
 
 __HOT RESTART__ the app and check debug console if the request response is logged:
+
+<img width="1358" alt="Screenshot 2021-01-07 at 18 09 52" src="https://user-images.githubusercontent.com/121164/103922110-99b5f780-5113-11eb-9deb-3613feacb897.png">
+
+### Write class for vaccination data
+
+First inspect the response in json editor to see what you will need:
+
+<img width="614" alt="Screenshot 2021-01-07 at 18 13 46" src="https://user-images.githubusercontent.com/121164/103922653-560fbd80-5114-11eb-8d9c-93c8daedee02.png">
+
+we need a class, e.g. VaccineStatus that has following fields
+- total, integer, number of people
+- rs, unsure, let's ignore this one
+- vaccinated, integer, number of people
+- difference_to_the_previous_day, integer, number of people
+- quote, float, vaccinations per 100 people
