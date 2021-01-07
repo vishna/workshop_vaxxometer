@@ -102,17 +102,43 @@ class _MyHomePageState extends State<MyHomePage> {
       body: FutureBuilder<List<StateEntry>>(
           future: fetchData(),
           builder: (context, snapshot) {
+            // an error occured
+            if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'An error occured ${snapshot.error}',
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            // there's no data yet
+            if (!snapshot.hasData) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Text(
+                      'Loading',
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            // we have data
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
+                    'We have data ${snapshot.data}',
+                  )
                 ],
               ),
             );

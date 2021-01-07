@@ -224,3 +224,52 @@ We want to display a loading state for our list, the list or error. We'll use Fu
 ```
 
 ...and remove other fetch from `main`
+
+### Handle respective states
+
+```dart
+        FutureBuilder<List<StateEntry>>(
+          future: fetchData(),
+          builder: (context, snapshot) {
+            // an error occured
+            if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'An error occured ${snapshot.error}',
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            // there's no data yet
+            if (!snapshot.hasData) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Text(
+                      'Loading',
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            // we have data
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'We have data ${snapshot.data}',
+                  ),
+                ],
+              ),
+            );
+          })
+```
