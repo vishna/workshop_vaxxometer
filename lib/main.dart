@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
             }
 
             // we have data
-            final items = snapshot.data;
+            final items = sortByNameAsc(snapshot.data);
             return ListView.builder(
               itemBuilder: (context, index) =>
                   StateEntryWidget(entry: items[index]),
@@ -183,4 +183,22 @@ class StateEntryWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+List<StateEntry> sortByQuotaDesc(List<StateEntry> input) {
+  final output = List<StateEntry>.from(input);
+  output.sort((a, b) => b.status.quote.compareTo(a.status.quote));
+  return output;
+}
+
+List<StateEntry> sortByVaccinatedDesc(List<StateEntry> input) {
+  final output = List<StateEntry>.from(input);
+  output.sort((a, b) => b.status.vaccinated.compareTo(a.status.vaccinated));
+  return output;
+}
+
+List<StateEntry> sortByNameAsc(List<StateEntry> input) {
+  final output = List<StateEntry>.from(input);
+  output.sort((a, b) => a.name.compareTo(b.name));
+  return output;
 }
