@@ -288,3 +288,18 @@ We have a list of elements, it would be cool if we displayed them as a scrollabl
               itemCount: items.length,
             );
 ```
+
+### Create Dedicated Widget for the list view item
+
+```dart
+class StateEntryWidget extends StatelessWidget {
+  final StateEntry entry;
+
+  const StateEntryWidget({Key key, this.entry}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(entry.name);
+  }
+}
+```

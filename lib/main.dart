@@ -134,7 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // we have data
             final items = snapshot.data;
             return ListView.builder(
-              itemBuilder: (context, index) => Text(items[index].name),
+              itemBuilder: (context, index) =>
+                  StateEntryWidget(entry: items[index]),
               itemCount: items.length,
             );
           }),
@@ -144,5 +145,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class StateEntryWidget extends StatelessWidget {
+  final StateEntry entry;
+
+  const StateEntryWidget({Key key, this.entry}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(entry.name);
   }
 }
