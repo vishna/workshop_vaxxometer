@@ -149,3 +149,12 @@ List<StateEntry> parseResponse(String jsonStr) {
   throw UnimplementedError();
 }
 ```
+
+### Let's write another test for this:
+
+```dart
+  test('make a list from json', () {
+    final states = parseResponse(full_json);
+    expect(states.isNotEmpty, true);
+  });
+```
