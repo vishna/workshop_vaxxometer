@@ -1,4 +1,4 @@
-## Vaxxometer Workshop, DB, 08/01/2021
+## Vaxxometer Workshop, 08/01/2021
 
 ### Let's check your flutter environment first:
 
@@ -26,14 +26,15 @@ cd vaxxometer
 
 Acceptance Criteria:
 
-- Vaccination Data is fetched from RKI servers: https://rki-vaccination-data.vercel.app/api
-- If data is loaded display it as a list
-- If data is being fetched display loading spinner
-- If data failed to load, display error message
-- Add button allowing toggling between alphabetical order and order based on vaccination progress
-- Tapping on an item should display a tapped item in detail view (see screenshot)
+- [ ] Vaccination Data is fetched from RKI servers: https://rki-vaccination-data.vercel.app/api
+- [ ] If data is loaded display it as a list
+- [ ] If data is being fetched display loading spinner
+- [ ] If data failed to load, display error message
+- [ ] Add button allowing toggling between alphabetical order and order based on vaccination progress
+- [ ] By default sort list in alphabetical order 
+- [ ] Tapping on an item should display a tapped item in detail view (see screenshot)
 
-Design by Łukasz Designs™:
+"Design spec":
 
 <img width="240" alt="Screenshot 2021-01-07 at 23 14 07" src="https://user-images.githubusercontent.com/121164/103950969-21b0f700-513e-11eb-9604-eb689984aa09.png"><img width="240" alt="Screenshot 2021-01-07 at 23 14 11" src="https://user-images.githubusercontent.com/121164/103950979-27a6d800-513e-11eb-8e20-114f81bb7170.png">
 
@@ -46,7 +47,7 @@ Hot reload and behold.
 
 https://flutter.dev/docs/cookbook/networking/fetch-data
 
-Visit pub.dev, copy paste latest version into your pubspec file.
+Visit pub.dev, and copy-paste latest version of http package into your pubspec file.
 
 Don't forget about necessary permissions for the platform you're developing for:
 
@@ -54,13 +55,13 @@ https://stackoverflow.com/questions/61196860/how-to-enable-flutter-internet-perm
 
 You might need to cold restart the app after chaning platform stuff.
 
-#### Let's fetch string data from our enpoint
+#### Fetch string data from our endpoint
 
 Copy code snippet from this web page (including import)
 
 https://flutter.dev/docs/cookbook/networking/fetch-data
 
-modify it to use our endpoint:
+Modify it to use with the RKI endpoint:
 
 ```dart
 Future<http.Response> fetchData() {
@@ -78,7 +79,7 @@ __HOT RESTART__ the app and check debug console if the request response is logge
 
 <img width="1358" alt="Screenshot 2021-01-07 at 18 09 52" src="https://user-images.githubusercontent.com/121164/103922110-99b5f780-5113-11eb-9deb-3613feacb897.png">
 
-### Write class for vaccination data
+### Write a class for the vaccination data
 
 First inspect the response in json editor to see what you will need:
 
@@ -107,7 +108,7 @@ class VaccineStatus {
 }
 ```
 
-We need to add factory method to parse following json:
+We need to add a factory method to parse the following json:
 
 ```json
 {"total": 3644826, "rs": "11", "vaccinated": 24159, "difference_to_the_previous_day": 2204, "vaccinations_per_1000_inhabitants": 6.583746901136969, "quote": 0.66}
@@ -154,7 +155,7 @@ List<StateEntry> parseResponse(String jsonStr) {
 }
 ```
 
-### Let's write another test for this:
+### Write another test for previous method:
 
 ```dart
   test('make a list from json', () {
@@ -179,7 +180,7 @@ List<StateEntry> parseResponse(String jsonStr) {
 }
 ```
 
-### Let's improve our fetchData method
+### Improve our fetchData method
 
 ```dart
 Future<List<StateEntry>> fetchData() async {
@@ -235,6 +236,7 @@ We want to display a loading state for our list, the list or error. We'll use Fu
         FutureBuilder<List<StateEntry>>(
           future: fetchData(),
           builder: (context, snapshot) {
+
             // an error occured
             if (snapshot.hasError) {
               return Center(
@@ -334,7 +336,7 @@ class StateEntryWidget extends StatelessWidget {
 }
 ```
 
-### Making it look pretty
+### Make it look "pretty"
 
 - [Deep Dive in Rows & Columns](https://medium.com/jlouage/flutter-row-column-cheat-sheet-78c38d242041)
 - [Applying Theme to Text](https://flutter.dev/docs/cookbook/design/themes)
@@ -411,6 +413,8 @@ List<StateEntry> sortByNameAsc(List<StateEntry> input) {
 
 ### Make sorting use extension
 
+https://dart.dev/guides/language/extension-methods
+
 ```dart
 extension StateEntrySortingExtensions on List<StateEntry> {
   List<StateEntry> sortedByQuotaDesc() {
@@ -433,7 +437,7 @@ extension StateEntrySortingExtensions on List<StateEntry> {
 }
 ```
 
-### Let's toggle sorting mode using floating action button
+### Toggle sorting mode using floating action button
 
 We need different icons
 
@@ -611,3 +615,11 @@ class SecondRoute extends StatelessWidget {
 ### Publish your work to codemagic.io as a static page
 
 https://docs.codemagic.io/publishing/publishing-to-codemagic-static-pages/
+
+
+### Optional
+
+- Use [json_serializable](https://flutter.dev/docs/development/data-and-backend/json#setting-up-json_serializable-in-a-project)
+- Add widget test & mock API call with a repository and [get_it](https://pub.dev/packages/get_it)
+- Use BLoC pattern
+- Add Theme switching
